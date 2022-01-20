@@ -1026,8 +1026,8 @@ readSparseFile(
 
   // Create a new RowMap with only rows having non-zero entries.
   size_t dummy = Teuchos::OrdinalTraits<Tpetra::global_size_t>::invalid();
-  Teuchos::RCP<const Tpetra::Map<> > rowMap = 
-       Teuchos::rcp(new Tpetra::Map<>(dummy, rowIdx(), 0, comm));
+  Teuchos::RCP<const Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type> > rowMap = 
+       Teuchos::rcp(new Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type>(dummy, rowIdx(), 0, comm));
 
   Teuchos::RCP<sparse_matrix_type> A = 
            rcp(new sparse_matrix_type(rowMap, nnzPerRow()));
@@ -1083,8 +1083,8 @@ readSparseFile(
       if (dist->VecMine(i)) vectorSet.push_back(i);
 
     dummy = Teuchos::OrdinalTraits<Tpetra::global_size_t>::invalid();
-    Teuchos::RCP<const Tpetra::Map<> > domainMap = 
-           Teuchos::rcp(new Tpetra::Map<>(dummy, vectorSet(), 0, comm));
+    Teuchos::RCP<const Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type> > domainMap = 
+           Teuchos::rcp(new Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type>(dummy, vectorSet(), 0, comm));
   
     Teuchos::Array<global_ordinal_type>().swap(vectorSet);
 
@@ -1094,8 +1094,8 @@ readSparseFile(
       if (dist->VecMine(i)) vectorSet.push_back(i);
   
     dummy = Teuchos::OrdinalTraits<Tpetra::global_size_t>::invalid();
-    Teuchos::RCP<const Tpetra::Map<> > rangeMap = 
-           Teuchos::rcp(new Tpetra::Map<>(dummy, vectorSet(), 0, comm));
+    Teuchos::RCP<const Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type> > rangeMap = 
+           Teuchos::rcp(new Tpetra::Map<local_ordinal_type, global_ordinal_type, node_type>(dummy, vectorSet(), 0, comm));
 
     Teuchos::Array<global_ordinal_type>().swap(vectorSet);
 
